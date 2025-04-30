@@ -1,0 +1,22 @@
+extends ../layouts/mainLayout
+
+block content
+  // Check if the employee object is empty or not
+  h1 #{(employee && Object.keys(employee).length > 0) ? 'Edit' : 'Add'} Employee
+
+  // Display the employee object in the page for debugging
+  //- pre= JSON.stringify(employee, null, 2)
+
+  form(action=employee && Object.keys(employee).length > 0 ? `/employees/edit/${employee.id}` : '/employees/create', method="POST")
+    .mb-3
+      label.form-label Name
+      input.form-control(type="text", name="name", value=employee ? employee.name : '')
+    .mb-3
+      label.form-label Email
+      input.form-control(type="email", name="email", value=employee ? employee.email : '')
+    .mb-3
+      label.form-label Status
+      select.form-control(name="status")
+        option(value="active", selected=employee && employee.status === 'active') Active
+        option(value="inactive", selected=employee && employee.status === 'inactive') Inactive
+    button.btn.btn-success(type="submit") Submit

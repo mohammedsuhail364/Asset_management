@@ -1,0 +1,17 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Scrap Asset
+
+  form(action="/scraps/create", method="POST")
+    .mb-3
+      label.form-label(for="assetId") Select Asset
+      select.form-control(name="assetId")
+        each asset in assets
+          option(value=asset.id) #{asset.name} (#{asset.serialNumber})
+
+    .mb-3
+      label.form-label(for="notes") Notes
+      input.form-control(type="text", name="notes", placeholder="Reason for scrapping...")
+
+    button.btn.btn-danger(type="submit") Scrap

@@ -1,0 +1,29 @@
+extends ../layouts/mainLayout
+
+block content
+  h1.text-center.mb-4 Issued Assets List
+
+  .mb-3.text-end
+    a.btn.btn-primary(href="/issue/create") + Create Issue
+
+  if issues && issues.length
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th S.No 
+          th Asset Serial Number
+          
+          th Employee Name
+          th Issue Date
+          th Status
+      tbody
+        each issue, index in issues
+          tr
+            td #{index + 1}
+            td #{issue.Asset.serialNumber}
+            
+            td #{issue.Employee.name}
+            td #{new Date(issue.createdAt).toLocaleDateString()}
+            td #{issue.status || 'issued'}
+  else
+    p.text-muted No assets have been issued yet.

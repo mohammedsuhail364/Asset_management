@@ -1,0 +1,15 @@
+extends ./layouts/mainLayout
+
+block content
+  .container.mt-5
+    h1.text-center.mb-4.text-primary Welcome to the Asset Management System
+
+    p.text-center.text-muted.mb-5 Easily manage assets, employees, and inventory workflows.
+
+    .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
+      each item in navLinks
+        .col
+          .card.h-100.shadow-sm.border-0.hover-shadow(style="transition: transform 0.2s;")
+            .card-body.text-center
+              h5.card-title.mb-3 #{item.name}
+              a.btn.btn-outline-primary.btn-sm(href=item.link) Go to #{item.name}

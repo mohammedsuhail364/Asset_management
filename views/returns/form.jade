@@ -1,0 +1,28 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Return Asset
+
+  if issues && issues.length
+    form(action="/return/create", method="POST")
+      .mb-3
+        label.form-label(for="assetId") Select Issued Asset
+        select.form-control(name="assetId")
+          each issue in issues
+            option(value=issue.assetId) #{issue.assetId}
+            //- #{issue.asset.name}
+      
+      .mb-3
+        label.form-label(for="employeeId") Select Employee
+        select.form-control(name="employeeId")
+          each employee in employees
+            option(value=employee.id) #{employee.name}
+
+      .mb-3
+        label.form-label(for="reason") Reason for Return
+        input.form-control(type="text", name="reason", required)
+
+      button.btn.btn-warning(type="submit") Return Asset
+  else
+    p.text-danger There is no issued product available to return.
+    button.btn.btn-warning(type="submit" disabled) Return Asset

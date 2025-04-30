@@ -1,0 +1,20 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Assets in Stock
+  table#stockTable.table.table-striped
+    thead
+      tr
+        th CategoryId
+        th Branch
+        th Value
+    tbody
+      each asset in assetsByBranch
+        tr
+          td #{asset[2]}  
+          td #{asset[0]}  
+          td #{asset[1]}  
+    tfoot
+      tr
+        th(colspan="2") Total Value
+        th #{totalValue}

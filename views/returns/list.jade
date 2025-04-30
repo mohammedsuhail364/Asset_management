@@ -1,0 +1,29 @@
+extends ../layouts/mainLayout
+
+block content
+  h1.text-center.mb-4 Returned Assets List
+
+  .mb-3.text-end
+    a.btn.btn-primary(href="/return/create") Return New Asset
+
+  if returns && returns.length
+    table.table.table-striped.table-bordered
+      thead
+        tr
+          th ID
+          th Asset ID
+          th Return Date
+          th Reason
+          th Status
+          
+      tbody
+        each returnedAsset in returns
+          tr
+            td #{returnedAsset.id}
+            td #{returnedAsset.assetId}
+            td #{returnedAsset.createdAt.toISOString().slice(0, 10)}
+            td #{returnedAsset.reason}
+            td #{returnedAsset.status || 'returned'}
+
+  else
+    p.text-muted No assets have been returned yet.

@@ -1,0 +1,30 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Assets
+  a.btn.btn-primary.mb-3(href="/assets/create") Add Asset
+  table#assetTable.table.table-striped.mt-3
+    thead
+      tr
+        th Unique ID
+        th Serial Number
+        th Make
+        th Model
+        th Branch
+        th Status
+        th Actions
+    tbody
+      if assets.length
+        each asset in assets
+          tr
+            td #{asset.uniqueId}
+            td #{asset.serialNumber}
+            td #{asset.make}
+            td #{asset.model}
+            td #{asset.branch}
+            td #{asset.status}
+            td
+              a.btn.btn-sm.btn-warning(href=`/assets/edit/${asset.id}`) Edit
+      else
+        tr
+          td(colspan="7") No assets found.

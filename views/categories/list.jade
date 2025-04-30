@@ -1,0 +1,16 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Categories
+  form(action="/categories/create", method="POST", class="mb-3")
+    .input-group
+      input.form-control(type="text", name="name", placeholder="New Category")
+      button.btn.btn-primary(type="submit") Add
+  table#categoryTable.table.table-striped
+    thead
+      tr
+        th Name
+    tbody
+      each category in categories
+        tr
+          td #{category.categoryName}

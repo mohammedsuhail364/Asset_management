@@ -1,0 +1,46 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 #{(issue && Object.keys(issue).length > 0) ? 'Edit' : 'Create'} Issue
+
+  form(action='/issue/create', method="POST")
+    .mb-3
+      label.form-label(for="assetId") Asset
+      select.form-control(name="assetId")
+        if assets && assets.length
+          each asset in assets
+            option(
+              value=asset.id,
+              selected=issue && issue.assetId == asset.id ? true : undefined
+            ) #{asset.serialNumber}
+        else
+          option(value="") No assets available
+
+    .mb-3
+      label.form-label(for="employeeId") Employee
+      select.form-control(name="employeeId")
+        if employees && employees.length
+          each employee in employees
+            option(
+              value=employee.id,
+              selected=issue && issue.employeeId == employee.id ? true : undefined
+            ) #{employee.name}
+        else
+          option(value="") No employees available
+
+    .mb-3
+      label.form-label(for="status") Status
+      select.form-control(name="status")
+        option(value="issued", selected=issue && issue.status === 'issued' ? true : undefined) Issued
+        option(value="returned", selected=issue && issue.status === 'returned' ? true : undefined) Returned
+        option(value="scrapped", selected=issue && issue.status === 'scrapped' ? true : undefined) Scrapped
+
+    .mb-3
+      label.form-label(for="issueDate") Issue Date
+      input.form-control(type="date", name="issueDate", value=issue ? issue.issueDate : '')
+
+    .mb-3
+      label.form-label(for="returnDate") Return Date
+      input.form-control(type="date", name="returnDate", value=issue ? issue.returnDate : '')
+
+    button.btn.btn-success(type="submit") Submit

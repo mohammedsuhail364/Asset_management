@@ -1,0 +1,27 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Scrap List
+
+  a.btn.btn-primary(href="/scraps/create") Create New Scrap
+
+  table.table.table-striped.mt-4
+    thead
+      tr
+        th ID
+        th Asset Serial Number
+        th Asset Make & Model
+        th Scrap Date
+        th Notes
+    tbody
+      if scraps.length
+        each scrap in scraps
+          tr
+            td #{scrap.id}
+            td #{scrap.Asset ? scrap.Asset.serialNumber : 'N/A'}
+            td #{scrap.Asset ? scrap.Asset.make + ' , ' + scrap.Asset.model : 'N/A'}
+            td #{scrap.scrapDate ? new Date(scrap.scrapDate).toISOString().slice(0, 10) : ''}
+            td #{scrap.notes || ''}
+      else
+        tr
+          td(colspan="5") No scrapped assets found.

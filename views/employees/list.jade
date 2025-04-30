@@ -1,0 +1,20 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Employees
+  a.btn.btn-primary.mb-3(href="/employees/create") Add Employee
+  table#employeeTable.table.table-striped.mt-3
+    thead
+      tr
+        th Name
+        th Email
+        th Status
+        th Actions
+    tbody
+      each employee in employees
+        tr
+          td #{employee.name}
+          td #{employee.email}
+          td #{employee.status}
+          td 
+            a.btn.btn-sm.btn-info(href=`/employees/edit/${employee.id}`) Edit

@@ -1,0 +1,38 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 #{(asset && Object.keys(asset).length > 0) ? 'Edit' : 'Add'} Asset
+  form(action=asset && Object.keys(asset).length > 0 ? `/assets/edit/${asset.id}` : '/assets/create', method="POST")
+    .mb-3
+      label.form-label Unique ID
+      input.form-control(type="text", name="uniqueId", value=asset ? asset.uniqueId : '')
+    .mb-3
+      label.form-label Serial Number
+      input.form-control(type="text", name="serialNumber", value=asset ? asset.serialNumber : '')
+    .mb-3
+      label.form-label Make
+      input.form-control(type="text", name="make", value=asset ? asset.make : '')
+    .mb-3
+      label.form-label Model
+      input.form-control(type="text", name="model", value=asset ? asset.model : '')
+    .mb-3
+      label.form-label Purchase Date
+      input.form-control(type="date", name="purchaseDate", value=asset ? asset.purchaseDate : '')
+    .mb-3
+      label.form-label Value
+      input.form-control(type="number", name="value", value=asset ? asset.value : '')
+    .mb-3
+      label.form-label Category
+      select.form-control(name="categoryId")
+        each category in categories
+          option(value=category.id selected=asset && asset.categoryId===category.id) #{category.categoryName}
+    .mb-3
+      label.form-label Branch
+      input.form-control(type="text", name="branch", value=asset ? asset.branch : '')
+    .mb-3
+      label.form-label Status
+      select.form-control(name="status")
+        option(value="in_stock" selected=asset && asset.status === 'in_stock') In Stock
+        option(value="issued" selected=asset && asset.status === 'issued') Issued
+        option(value="scrapped" selected=asset && asset.status === 'scrapped') Scrapped
+    button.btn.btn-success(type="submit") Submit

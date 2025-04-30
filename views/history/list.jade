@@ -1,0 +1,44 @@
+extends ../layouts/mainLayout
+
+block content
+  h1 Asset History
+  h3 #{asset.branch} (#{asset.serialNumber})
+
+  h4 Issued History
+  table.table.table-striped
+    thead
+      tr
+        th Employee
+        th Date
+    tbody
+      each issue in issues
+        tr
+          td #{issue.employeeId}
+          td #{issue.createdAt.toDateString()}
+
+  h4 Return History
+  table.table.table-striped
+    thead
+      tr
+        th Reason
+        th Date
+    tbody
+      each ret in returns
+        tr
+          td #{ret.reason}
+          td #{ret.createdAt.toDateString()}
+
+  h4 Scrap Info
+  if scraps.length
+    table.table.table-striped
+      thead
+        tr
+          th Notes
+          th Date
+      tbody
+        each scrap in scraps
+          tr
+            td #{scrap.notes}
+            td #{scrap.createdAt.toDateString()}
+  else
+    p No scrap records.
