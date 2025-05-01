@@ -64,7 +64,38 @@ To streamline the tracking, issuing, returning, and scrapping of tangible compan
    bash
    git clone https://github.com/yourusername/asset-management-system.git
    cd asset-management-system
-  ```
-Install dependencies
 
+2 . Install dependencies
 
+npm install
+
+3 . Configure PostgreSQL
+
+Set DB connection in .env or config/config.json
+
+Create database and run migrations:
+
+npx sequelize db:create
+npx sequelize db:migrate
+
+4 . Start the application
+
+npm start
+
+📂 Folder Structure
+
+.
+├── models/            # Sequelize models
+├── routes/            # Route definitions
+├── controllers/       # Route logic handlers
+├── views/             # Jade templates
+├── public/            # Static assets (CSS/JS)
+├── config/            # Sequelize & DB config
+├── app.js             # Entry point
+└── README.md
+
+📌 License
+This project is licensed under the MIT License.
+
+👨‍💻 Author
+Mohammed Suhail S
